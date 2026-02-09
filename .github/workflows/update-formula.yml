@@ -1,0 +1,41 @@
+name: Update Formula
+
+on:
+  workflow_dispatch:
+    inputs:
+      formula:
+        description: 'Formula name (e.g., my-cli)'
+        required: true
+      tag:
+        description: 'Release tag (e.g., v1.0.1)'
+        required: true
+      repository:
+        description: 'Source repo (e.g., mgm702/my-cli)'
+        required: true
+
+jobs:
+  update:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update Ruby File
+        run: |
+          VERSION="${{ github.event.inputs.tag }}"
+          CLEAN_VER="${VERSION#v}"
+          REPO="${{ github.event.inputs.repository }}"
+          FORMULA="${{ github.event.inputs.formula }}"
+
+          # Adjust this URL pattern to match how you name your release assets
+          URL="https://github.com/${REPO}/releases/download/${VERSION}/${FORMULA}-macos.tar.gz"
+
+          curl -L $URL -o binary.tar.gz
+          SHA=$(shasum -a 256 binary.tar.gz | awk '{print $1}')
+
+          sed -i '' "s/version \".*\"/version \"${CLEAN_VER}\"/" "Formula/${FORMULA}.rb"
+          sed -i '' "s/sha256 \".*\"/sha256 \"${SHA}\"/" "Formula/${FORMULA}.rb"
+
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add .
+          git commit -m "Update ${FORMULA} to ${VERSION}"
+          git push
