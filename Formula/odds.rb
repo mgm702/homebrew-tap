@@ -5,20 +5,20 @@
 class Odds < Formula
   desc "CLI for The Odds API v4"
   homepage "https://github.com/mgm702/odds-api"
-  version "0.1.0"
+  version "0.2.0"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/mgm702/odds-api/releases/download/v0.1.0/odds_0.1.0_darwin_amd64.tar.gz"
-      sha256 "090c8864cf239ed94b3474f476ddb8360c9125072dfaddfbb1195a290ff22050"
+      url "https://github.com/mgm702/odds-api/releases/download/v0.2.0/odds_0.2.0_darwin_amd64.tar.gz"
+      sha256 "a7d0db57e05143614c9458d4a2e86b057a132bc0e7736b5a83a638eb62639076"
 
       define_method(:install) do
         bin.install "odds"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/mgm702/odds-api/releases/download/v0.1.0/odds_0.1.0_darwin_arm64.tar.gz"
-      sha256 "bade6d17f897607056f9b3fc4eab181821fba515ab2b20f465c4a30af229e4ec"
+      url "https://github.com/mgm702/odds-api/releases/download/v0.2.0/odds_0.2.0_darwin_arm64.tar.gz"
+      sha256 "6abcdc3f4da18c90c99c5318e993180f86be84d3c1b95d3cba10a2d5827beda4"
 
       define_method(:install) do
         bin.install "odds"
@@ -28,15 +28,15 @@ class Odds < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/mgm702/odds-api/releases/download/v0.1.0/odds_0.1.0_linux_amd64.tar.gz"
-      sha256 "a2249ab9f537103bcec9cbf4b7b9daf6bbf77a3f2367511fa341db530543a7d8"
+      url "https://github.com/mgm702/odds-api/releases/download/v0.2.0/odds_0.2.0_linux_amd64.tar.gz"
+      sha256 "2c8335db4bfb7c0ba45d17441d76cebcb2e5cdcd904415dca44ec50ce8cb3db6"
       define_method(:install) do
         bin.install "odds"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/mgm702/odds-api/releases/download/v0.1.0/odds_0.1.0_linux_arm64.tar.gz"
-      sha256 "002b218cf50e9539895a3e9e0a9af54bb027a4d9be78a4dafa103f558e5ab587"
+      url "https://github.com/mgm702/odds-api/releases/download/v0.2.0/odds_0.2.0_linux_arm64.tar.gz"
+      sha256 "1726607c8649d19e6b6e7c402f2641a68a1a25e76702f37e1b2df6ce199a60b1"
       define_method(:install) do
         bin.install "odds"
       end
